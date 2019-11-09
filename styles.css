@@ -1,0 +1,38 @@
+body {
+	font-family: 'Lexend Deca', sans-serif;
+	line-height: 1.75em;
+	font-size: 1.2em;
+	margin: 0;
+}
+h1 { font-size: 3em; }
+h2 { font-size: 2.2em; }
+h3 { font-size: 1.8em; }
+article {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.out-of-view,
+.hidden {
+	visibility: hidden;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.animation-fade {
+	animation: fadein 0.5s;
+}
+
+@keyframes fadeinreverse {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.animation-fade-reverse {
+	visibility: visible;
+	animation: fadeinreverse 0.5s;
+	animation-fill-mode: forwards;
+}
