@@ -36,6 +36,14 @@ Setting `aiv-delay` will hold the transition to in-view by the specified number 
 <div aiv aiv-delay="500">Repeating transition.</div>
 ```
 
+### Offset
+
+To make an element trigger it's in-view classes earlier or later specifcy `aiv-offset` in pixels.
+
+```
+<div aiv aiv-offset="200">Toggle classes 200px down the page.</div>
+```
+
 ### Children
 
 You can toggle classes on child elements by adding a css selector in the `aiv-children` property. This is best used with `aiv-delay` which will toggle child elements in sequence.
