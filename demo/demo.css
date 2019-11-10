@@ -12,8 +12,7 @@ article {
 	margin: 0 auto;
 }
 
-.out-of-view,
-.hidden {
+.out-of-view {
 	visibility: hidden;
 }
 

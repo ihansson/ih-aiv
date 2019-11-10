@@ -176,4 +176,4 @@ if ( !NodeList.prototype.forEach ) {
   }
 }
 
-window.AIV = Object.create(AnimateInView).init(document.querySelector('body'))
+module.exports = Object.create(AnimateInView).init(document.querySelector('body'));
