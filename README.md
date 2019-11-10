@@ -15,7 +15,7 @@ In-view classes can be toggled using an html attribute `aiv` `aiv-...` interface
 
 ### Extended Examples
 
-You can add custom classes using `aiv-cls` and `aiv-out_cls`.
+You can add custom classes using `aiv-cls` and `aiv-out_cls`. Set an offset from which the toggle will happen. Add a delay to when the node is toggled. Or change wheter a toggle is repeated or if visible from the start.
 
 ```html
 <div aiv="cls: yellow; cls_out: red; repeat;">Yellow when in. Red when out. Repeats when revisiting.</div>
