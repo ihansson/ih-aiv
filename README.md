@@ -6,7 +6,7 @@ AIV is a simple library for toggling classes when elements are inview. With supp
 
 ## Basic Example
 
-In-view classes can be toggled using an html attribute `aiv` `aiv-...` interface. Simply calling aiv will trigger the built in `in-view` and `out-of-view` classes.
+Simply adding the aiv property will trigger the built in `in-view` and `out-of-view` classes. Settings are separated with a comma, here we are setting the repeat flag to activate the toggle on repeat changes in visibility.
 
 ```html
 <div aiv="cls: toggled; repeat;">Will have the 'toggled' class when in view.</div>
@@ -15,7 +15,7 @@ In-view classes can be toggled using an html attribute `aiv` `aiv-...` interface
 
 ### Extended Examples
 
-You can add custom classes using `aiv-cls` and `aiv-out_cls`. Set an offset from which the toggle will happen. Add a delay to when the node is toggled. Or change wheter a toggle is repeated or if visible from the start.
+You can add custom classes when an element comes in or out of view. Set an offset from which the toggle will happen. Add a delay to when the node is toggled. Or change wheter a toggle is repeated or visible from the start (to not include the out-of-view class).
 
 ```html
 <div aiv="cls: yellow; cls_out: red; repeat;">Yellow when in. Red when out. Repeats when revisiting.</div>
@@ -29,7 +29,7 @@ You can add custom classes using `aiv-cls` and `aiv-out_cls`. Set an offset from
 
 ### Children
 
-You can toggle classes on child elements by adding a css selector in the `aiv-children` property. This is best used with `aiv-delay` which will toggle child elements in sequence.
+You can toggle classes on child elements by using a selector in the `children` setting. This is best used with `delay` which will toggle child elements in sequence.
 
 ```html
 <ul aiv="cls: animation-fade; children: li; delay: 200;">
@@ -66,7 +66,7 @@ One can also initilize aiv using the javascript interface by supplying a selecto
 | delay | 0 | Time in milliseconds before the element goes in view when class is added |
 | offset | 0 | Distance in pixels the element is from the viewport before it should toggle the class |
 | children | none | Selector for child elements which should be toggled. This will cause delay to work in sequence. |
-| start_visible | false | If the element should be visible before toggled |
+| start_visible | false | If the element should be visible before toggled (include the out-of-view class) |
 
 ### Init
 
