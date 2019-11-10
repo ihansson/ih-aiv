@@ -111,3 +111,19 @@ The following options can be configured when initializing aiv
 	selector: '[aiv]'
 })</script>
 ```
+
+### Optional CSS
+
+AIV does not require you to include any CSS to work. If you want to hide elements on load you should add the following class
+
+```css
+.out-of-view {
+	visibility: hidden;
+}
+```
+
+You can also include the `aiv-optional.css` file which includes this helper and basic animations. @TODO
+
+```html
+<link rel="stylesheet" type="text/css" href="aiv-optional.css">
+```
