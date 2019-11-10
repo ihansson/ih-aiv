@@ -4,62 +4,27 @@
 
 AIV is a simple library for toggling classes when elements are inview. With support for offseting when the element is in-view, delaying the animation, or triggering classes on child elements in sequence.
 
-## Init
-
-Include the library and init using default options or given options
-
-```html
-<script type="text/javascript" src="aiv.min.js"></script>
-<script type="text/javascript">aiv.init()</script>
-```
-
-```html
-<script type="text/javascript" src="aiv.min.js"></script>
-<script type="text/javascript">aiv.init({
-	in_cls: 'in-view',
-	out_cls: 'out-of-view',
-	throttle: 50
-})</script>
-```
-
-## Getting Started
+## Basic Example
 
 In-view classes can be toggled using an html attribute `aiv` `aiv-...` interface. Simply calling aiv will trigger the built in `in-view` and `out-of-view` classes.
 
 ```html
-<div aiv>Basic Toggle</div>
+<div aiv="cls: toggled; repeat;">Will have the 'toggled' class when in view.</div>
+
 ```
 
-### Custom Classes
+### Extended Examples
 
 You can add custom classes using `aiv-cls` and `aiv-out_cls`.
 
 ```html
-<div aiv aiv-cls="yellow" aiv-out_cls="red">Yellow when in. Red when out.</div>
-```
+<div aiv="cls: yellow; cls_out: red; repeat;">Yellow when in. Red when out. Repeats when revisiting.</div>
 
-### Repeat
+<div aiv="cls: yellow; offset: 200;">Yellow when 200px into viewport.</div>
 
-By default an element will only trigger classes once. If you want the animation to repeat when coming back to it use `aiv-repeat`.
+<div aiv="cls: yellow; delay: 2000;">Yellow after being in viewport for 2 seconds.</div>
 
-```html
-<div aiv aiv-cls="yellow" aiv-out_cls="red" aiv-repeat>Repeating transition.</div>
-```
-
-### Delay
-
-Setting `aiv-delay` will hold the transition to in-view by the specified number in milliseconds.
-
-```html
-<div aiv aiv-delay="500">Repeating transition.</div>
-```
-
-### Offset
-
-To make an element trigger it's in-view classes earlier or later specifcy `aiv-offset` in pixels.
-
-```html
-<div aiv aiv-offset="200">Toggle classes 200px down the page.</div>
+<div aiv="cls: yellow; start_visible">Yellow in viewport. Starts visible</div>
 ```
 
 ### Children
@@ -67,32 +32,82 @@ To make an element trigger it's in-view classes earlier or later specifcy `aiv-o
 You can toggle classes on child elements by adding a css selector in the `aiv-children` property. This is best used with `aiv-delay` which will toggle child elements in sequence.
 
 ```html
-<ul aiv aiv-children="li" aiv-delay="200">
-	<li>Child element 1</li>
-	<li>Child element 2</li>
-	<li>Child element 3</li>
+<ul aiv="cls: animation-fade; children: li; delay: 200;">
+	<li>Fade in when in view</li>
+	<li>Fade in when in view after 200 milliseconds</li>
+	<li>Fade in when in view after 400 milliseconds</li>
 </ul>
 ```
 
-### Start Visible
+### Javascript initialization 
 
-By default, aiv will add the out classes to an element immediately upon loading to allow for page load animations. If you do not wish to use this set the `aiv-start_visible` paramater.
-
-```html
-<div aiv aiv-offset="200" aiv-start_visible>Toggle classes 200px down the page.</div>
-```
-
-### JS Api
-
-Temporary, to be rewritten
+One can also initilize aiv using the javascript interface by supplying a selector and options.
 
 ```html
 <h3 class="js-api-example">JS API Example</h3>
 ```
 
 ```javascript
-aiv.add_nodes('.js-api-example',{
+aiv.add('.js-api-example',{
 	repeat: true,
 	delay: 500
 })
+```
+
+### AIV Options
+
+One can also initilize aiv using the javascript interface by supplying a selector and options.
+
+| Command | Default | Description |
+| --- | --- | --- |
+| cls | none | Class to be added when element is in view |
+| out_cls | none | Class to be added when element goes out of view |
+| repeat | false | If the element should repeat the toggle when going out and in view after it has gone into view once. |
+| delay | 0 | Time in milliseconds before the element goes in view when class is added |
+| offset | 0 | Distance in pixels the element is from the viewport before it should toggle the class |
+| children | none | Selector for child elements which should be toggled. This will cause delay to work in sequence. |
+| start_visible | false | If the element should be visible before toggled |
+
+### Init
+
+Include the library and init using default options.
+
+```html
+<script type="text/javascript" src="aiv.min.js"></script>
+<script type="text/javascript">aiv.init()</script>
+```
+
+### Init Options
+
+The following options can be configured when initializing aiv 
+
+| Command | Default | Description |
+| --- | --- | --- |
+| in_cls | 'in-view' | The default class to be added to elements in view |
+| out_cls | 'out-of-view' | The default class to be added to elements out of view |
+| throttle | 50 | Time in milliseconds to limit the updating of toggles |
+| context | document.body | The parent node from which to track nodes for updating |
+| selector | [aiv] | Selector for loading nodes to be tracked by aiv |
+
+#### Change default classes
+
+```html
+<script type="text/javascript" src="aiv.min.js"></script>
+<script type="text/javascript">aiv.init({
+	in_cls: 'in-view',
+	out_cls: 'out-of-view',
+})</script>
+```
+
+#### All init settings
+
+```html
+<script type="text/javascript" src="aiv.min.js"></script>
+<script type="text/javascript">aiv.init({
+	in_cls: 'in-view',
+	out_cls: 'out-of-view',
+	throttle: 50,
+	context: document.body,
+	selector: '[aiv]'
+})</script>
 ```

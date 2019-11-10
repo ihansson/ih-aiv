@@ -100,9 +100,12 @@ function configure(_opts){
 	}
 }
 
-// Add items to context
-function add(ctx){
-	nodes = nodes.concat(Array.prototype.slice.call(ctx.querySelectorAll('[aiv]')))
+// Setup before first update
+function add(selector, options){
+	let _nodes = opts.context.querySelectorAll(selector);
+	_nodes = Array.prototype.slice.call(_nodes)
+	for(i in _nodes) load(_nodes[i], options)
+	nodes = nodes.concat(_nodes)
 }
 
 // Remove node from list to update
@@ -111,41 +114,19 @@ function remove(node){
 	nodes = nodes.filter(_node => _node !== node)
 }
 
-// Bind scroll and resize events to update toggles
-function bind(ctx){
-	ctx.addEventListener('scroll', update)
-	ctx.addEventListener('resize', update)
-	ctx.setTimeout(function(){
-		let event = document.createEvent("Event");
-		event.initEvent("scroll", false, true); 
-		if(ctx.pageXOffset == 0) ctx.dispatchEvent(event);
-	}, 60)
-}
-
-// Unbind events
-function unbind(ctx){
-	ctx.removeEventListener('scroll', update)
-	ctx.removeEventListener('resize', update)
-}
-
-// Setup before first update
-function load(){
-	let _nodes = nodes;
-	for(i in _nodes) load_node(_nodes[i])
-}
-
 // Sets up initial classes on nodes
-function load_node(node, options){
+function load(node, options){
 
 	node.aiv = {
-		triggered: false,
-		cls : get_attr(node, 'cls', false),
-		out_cls : get_attr(node, 'out_cls', false),
-		children : get_attr(node, 'children', false),
-		repeat : get_attr(node, 'repeat', false, false, true),
-		start_visible : get_attr(node, 'start_visible', false, false, true),
-		delay : get_attr(node, 'delay', 0, true),
-		offset : get_attr(node, 'offset', 0, true),
+		delay : 0,
+		offset : 0,
+	}
+
+	if(node.attributes.aiv){
+		let settings = node.attributes.aiv ? extract_settings(node.attributes.aiv.nodeValue) : {};
+		for(setting in settings){
+			node.aiv[setting] = settings[setting]
+		}
 	}
 
 	if(options){
@@ -155,8 +136,6 @@ function load_node(node, options){
 	}
 
 	if(node.aiv.children) node.aiv.children = Array.prototype.slice.call(node.querySelectorAll(node.aiv.children));
-
-	console.log(node, node.aiv)
 
 	const to_change = node.aiv.children ? node.aiv.children : [node]
 
@@ -237,16 +216,22 @@ function className(node, cls){
 	node.className = cls.join(' ');
 }
 
-// Get attribute values with defaults
-function get_attr(node, attr, def, number, toggle){
-	const att = node.attributes['aiv-'+attr];
-	if(!att) return def;
-	if(toggle) return true;
-	if(number) return parseInt(att.nodeValue);
-	return att.nodeValue;
+// Extracts setting values
+function extract_settings(string){
+	let settings = {};
+	if(!string) return settings;
+	string.split(';').forEach(function(setting){
+		let arr = setting.trim().split(':')
+		if(!arr[0]) return;
+		let key = arr[0].trim();
+		let value = arr[1] ? arr[1].trim() : true;
+		if(['delay', 'offset'].indexOf(key) !== -1) value = parseInt(value)
+		settings[key] = arr[1] ? value : true
+	});
+	return settings;
 }
 
-//
+// Is element within window bounds
 function is_in_view(node, visible){
 	return (node.offsetTop + node.aiv.offset) <= visible.bottom && (node.offsetTop + node.offsetHeight + node.aiv.offset) >= visible.top;
 }
@@ -257,30 +242,41 @@ function visible_area(){
 	return {top: y, bottom: y + parseInt(window.innerHeight)}
 }
 
-// JS API
-function add_nodes(selector, options){
-	let _nodes = Array.prototype.slice.call(document.querySelectorAll(selector));
-	for(i in _nodes) load_node(_nodes[i], options)
-	nodes = nodes.concat(_nodes)
+// Bind scroll and resize events to update toggles
+function bind(){
+	window.addEventListener('scroll', update)
+	window.addEventListener('resize', update)
+	window.setTimeout(function(){
+		let event = document.createEvent("Event");
+		event.initEvent("scroll", false, true); 
+		if(window.pageXOffset == 0) window.dispatchEvent(event);
+	}, 60)
+}
+
+// Unbind events
+function unbind(){
+	window.removeEventListener('scroll', update)
+	window.removeEventListener('resize', update)
 }
 
 // Set default options
-function init(options, context, win){
-	configure(options || {
+function init(options){
+	configure({
 		in_cls: 'in-view',
 		out_cls: 'out-of-view',
-		throttle: 50
-	})
-	add(context || document.body);
-	load();
-	bind(win || window);
+		throttle: 50,
+		context: document.body,
+		selector: '[aiv]'
+	});
+	if(options) configure(options);
+	if(opts.context){
+		add('[aiv]');
+	}
+	bind();
 }
 
 module.exports = {
-	configure: configure,
-	load: load,
 	add: add,
-	add_nodes: add_nodes,
 	remove: remove,
 	bind: bind,
 	unbind: unbind,
