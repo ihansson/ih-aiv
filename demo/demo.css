@@ -12,10 +12,6 @@ article {
 	margin: 0 auto;
 }
 
-.out-of-view {
-	visibility: hidden;
-}
-
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
