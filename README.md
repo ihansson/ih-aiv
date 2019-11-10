@@ -2,6 +2,8 @@
 
 # AIV - Animate In View
 
+## [View demo](http://s222665.gridserver.com/ih-aiv/demo/demo.html)
+
 AIV is a simple library for toggling classes when elements are inview. With support for offseting when the element is in-view, delaying the animation, or triggering classes on child elements in sequence.
 
 ## Basic Example
@@ -32,7 +34,7 @@ You can add custom classes when an element comes in or out of view. Set an offse
 You can toggle classes on child elements by using a selector in the `children` setting. This is best used with `delay` which will toggle child elements in sequence.
 
 ```html
-<ul aiv="cls: animation-fade; children: li; delay: 200;">
+<ul aiv="cls: aiv-fade; children: li; delay: 200;">
 	<li>Fade in when in view</li>
 	<li>Fade in when in view after 200 milliseconds</li>
 	<li>Fade in when in view after 400 milliseconds</li>
@@ -122,8 +124,16 @@ AIV does not require you to include any CSS to work. If you want to hide element
 }
 ```
 
-You can also include the `aiv-optional.css` file which includes this helper and basic animations. @TODO
+You can also include the `aiv-optional.css` file which includes this helper and basic animations. 
 
 ```html
 <link rel="stylesheet" type="text/css" href="aiv-optional.css">
 ```
+
+### TODO
+
+* Redo animation library
+* Make a separate delay for handling child element parent
+* Redo offset. Make configurable from both ends and viewport based.
+* Browser testing
+* Performance testing

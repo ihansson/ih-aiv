@@ -1,5 +1,5 @@
 {
-  "name": "ih-aiw",
+  "name": "ih-aiv",
   "version": "0.0.1",
   "description": "A simple library for toggling classes and animations when in view.",
   "main": "src/aiv.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ihansson/ih-aiw.git"
+    "url": "git+https://github.com/ihansson/ih-aiv.git"
   },
   "keywords": [
     "javascript",
@@ -17,9 +17,9 @@
   "author": "Ian Hansson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ihansson/ih-aiw/issues"
+    "url": "https://github.com/ihansson/ih-aiv/issues"
   },
-  "homepage": "https://github.com/ihansson/ih-aiw#readme",
+  "homepage": "https://github.com/ihansson/ih-aiv#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
