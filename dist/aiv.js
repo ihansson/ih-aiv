@@ -111,7 +111,7 @@ function add(selector, options){
 // Remove node from list to update
 function remove(node){
 	if(node.aiv.timeout) window.clearTimeout(node.aiv.timeout)
-	nodes = nodes.filter(_node => _node !== node)
+	nodes = nodes.filter(function(_node){ return _node !== node})
 }
 
 // Sets up initial classes on nodes
@@ -119,7 +119,9 @@ function load(node, options){
 
 	node.aiv = {
 		delay : 0,
+		delay_all: 0,
 		offset : 0,
+		in_view: [0,1]
 	}
 
 	if(node.attributes.aiv){
@@ -139,10 +141,8 @@ function load(node, options){
 
 	const to_change = node.aiv.children ? node.aiv.children : [node]
 
-	let in_cls = [opts.in_cls];
-	if(node.aiv.cls) in_cls.push(node.aiv.cls)
-	let out_cls = [opts.out_cls];
-	if(node.aiv.out_cls) out_cls.push(node.aiv.out_cls)
+	let in_cls = [node.aiv.cls ? node.aiv.cls : opts.in_cls];
+	let out_cls = [node.aiv.out_cls ? node.aiv.out_cls : opts.out_cls];
 
 	for(index in to_change){
 
@@ -188,7 +188,7 @@ function toggle(node, visible){
 			if(node.aiv.delay){
 				target_node.aiv.timeout = window.setTimeout(function(){
 					className(target_node, target_node.aiv.in_cls)
-				}, node.aiv.delay * (node.aiv.children ? index : index + 1))
+				}, (node.aiv.delay * (node.aiv.children ? index : index + 1)) + node.aiv.delay_all)
 			} else {
 				className(target_node, target_node.aiv.in_cls)
 			}
@@ -225,7 +225,8 @@ function extract_settings(string){
 		if(!arr[0]) return;
 		let key = arr[0].trim();
 		let value = arr[1] ? arr[1].trim() : true;
-		if(['delay', 'offset'].indexOf(key) !== -1) value = parseInt(value)
+		if(['delay', 'offset', 'delay_all'].indexOf(key) !== -1) value = parseInt(value)
+		if(['in_view'].indexOf(key) !== -1) value = value.split(',').map(function(value){ return parseFloat(value) })
 		settings[key] = arr[1] ? value : true
 	});
 	return settings;
@@ -233,13 +234,16 @@ function extract_settings(string){
 
 // Is element within window bounds
 function is_in_view(node, visible){
-	return (node.offsetTop + node.aiv.offset) <= visible.bottom && (node.offsetTop + node.offsetHeight + node.aiv.offset) >= visible.top;
+	let bottom = visible.bottom + (node.aiv.in_view[1] * visible.height) - visible.height;
+	let top = visible.top + (node.aiv.in_view[0] * visible.height);
+	return (node.offsetTop + node.aiv.offset) <= bottom && (node.offsetTop + node.offsetHeight + node.aiv.offset) >= top;
 }
 
 // Get visible area in window
 function visible_area(){
 	let y = parseInt(window.pageYOffset);
-	return {top: y, bottom: y + parseInt(window.innerHeight)}
+	let height = parseInt(window.innerHeight);
+	return {top: y, bottom: y + height, height: height}
 }
 
 // Bind scroll and resize events to update toggles

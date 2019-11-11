@@ -1,8 +1,4 @@
-## I would not recommend using this package at the moment as it's still under heavy construction.
-
-# AIV - Animate In View
-
-## [View demo](http://s222665.gridserver.com/ih-aiv/demo/demo.html)
+# AIV - Animate In View - [View demo](http://ianhan.com/libraries/ih-aiv/demo)
 
 AIV is a simple library for toggling classes when elements are inview. With support for offseting when the element is in-view, delaying the animation, or triggering classes on child elements in sequence.
 
@@ -20,7 +16,7 @@ Simply adding the aiv property will trigger the built in `in-view` and `out-of-v
 You can add custom classes when an element comes in or out of view. Set an offset from which the toggle will happen. Add a delay to when the node is toggled. Or change wheter a toggle is repeated or visible from the start (to not include the out-of-view class).
 
 ```html
-<div aiv="cls: yellow; cls_out: red; repeat;">Yellow when in. Red when out. Repeats when revisiting.</div>
+<div aiv="cls: yellow; out_cls: red; repeat;">Yellow when in. Red when out. Repeats when revisiting.</div>
 
 <div aiv="cls: yellow; offset: 200;">Yellow when 200px into viewport.</div>
 
@@ -31,7 +27,7 @@ You can add custom classes when an element comes in or out of view. Set an offse
 
 ### Children
 
-You can toggle classes on child elements by using a selector in the `children` setting. This is best used with `delay` which will toggle child elements in sequence.
+You can toggle classes on child elements by using a selector in the `children` setting. This is best used with `delay` which will toggle child elements in sequence. If you want to delay the execution of an entire child block then use the `delay_all` setting.
 
 ```html
 <ul aiv="cls: aiv-fade; children: li; delay: 200;">
@@ -39,6 +35,19 @@ You can toggle classes on child elements by using a selector in the `children` s
 	<li>Fade in when in view after 200 milliseconds</li>
 	<li>Fade in when in view after 400 milliseconds</li>
 </ul>
+<ul aiv="cls: aiv-fade; children: li; delay: 200; delay_all: 600;">
+	<li>Fade in when in view</li>
+	<li>Fade in when in view after 200 milliseconds</li>
+	<li>Fade in when in view after 400 milliseconds</li>
+</ul>
+```
+
+### In View
+
+Numbers correlating to the positions in view to show the element as visible. For example -0.1,1.1 would show the element 10% before and after the element would usually be visible. 0.1,0.9 would should the element when it is 10% below the top of the screen and 10% above the bottom of the screen.
+
+```html
+<div aiv="cls: yellow; in_view: 0.1,0.9;">Yellow when between 10% and 90% of the screen</div>
 ```
 
 ### Javascript initialization 
@@ -66,7 +75,9 @@ One can also initilize aiv using the javascript interface by supplying a selecto
 | out_cls | none | Class to be added when element goes out of view |
 | repeat | false | If the element should repeat the toggle when going out and in view after it has gone into view once. |
 | delay | 0 | Time in milliseconds before the element goes in view when class is added |
+| delay_all | 0 | Used with child elements to add a delay to all children in addition to a delay between them |
 | offset | 0 | Distance in pixels the element is from the viewport before it should toggle the class |
+| in_view | '0,1' | Numbers correlating to the positions in view to show the element as visible. |
 | children | none | Selector for child elements which should be toggled. This will cause delay to work in sequence. |
 | start_visible | false | If the element should be visible before toggled (include the out-of-view class) |
 
@@ -132,8 +143,8 @@ You can also include the `aiv-optional.css` file which includes this helper and 
 
 ### TODO
 
-* Redo animation library
-* Make a separate delay for handling child element parent
-* Redo offset. Make configurable from both ends and viewport based.
+* Add events
 * Browser testing
 * Performance testing
+* Redo animation library / vendor prefixes
+* Redo demo

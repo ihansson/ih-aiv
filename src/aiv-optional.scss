@@ -19,8 +19,8 @@
 }
 
 .aiv-fade-reverse {
-	visibility: visible;
 	animation: aiv_fade_reverse 0.5s;
+    animation-fill-mode: forwards;
 }
 
 /* Slides */
@@ -62,8 +62,8 @@
 }
 
 .aiv-twist-reverse { 
-	visibility: visible;
 	animation: aiv_twist_reverse 0.5s; 
+    animation-fill-mode: forwards;
 }
 
 /* Scale */
