@@ -4,87 +4,140 @@
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="demo.css">
 		<link rel="stylesheet" type="text/css" href="../dist/aiv-optional.css">
 		<title>Animate in view</title>
 	</head>
 	<body>
-		<article>
+		<article class="wrapper">
 			<header>
 				<h1>Animate in view - Demo</h1>
+				<p>AIV is a simple library for toggling classes when elements are inview. With support for offseting when the element is in-view, delaying the animation, or triggering classes on child elements in sequence.</p>
+				<dl>
+				  <dt>Github</dt>
+				  <dd><a href="https://github.com/ihansson/ih-iav">github.com/ihansson/ih-iav</a></dd>
+				  <dt>By Ian Hansson</dt>
+				  <dd><a href="http://ianhan.com">ianhan.com</a></dd>
+				</dl>
 			</header>
-			<section>
-				<h2 id="event_test" aiv="cls: aiv-slide-up; repeat;">Twist</h2>
+			<section class="page">
+				<h2 aiv="cls: aiv-slide-up; repeat;">Twist</h2>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-twist; children: .card; delay: 200; repeat;&quot;</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;cards&quot;</span><span style="color: #f92672">&gt;</span>
+	<span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;card&quot;</span><span style="color: #f92672">&gt;</span>
+		<span style="color: #f92672">&lt;h3&gt;</span>Title<span style="color: #f92672">&lt;/h3&gt;</span>
+		<span style="color: #f92672">&lt;p&gt;</span>Phasellus facilisis pretium est sit amet ultrices.<span style="color: #f92672">&lt;/p&gt;</span>
+	<span style="color: #f92672">&lt;/div&gt;</span>
+	...
+<span style="color: #f92672">&lt;/div&gt;</span>
+</pre></div>
 				<div aiv="cls: aiv-twist; children: .card; delay: 200; repeat;" class="cards">
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
-					</div>
-					<div class="card">
-						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 				</div>
+			</section>
+			<section class="page">
 				<h2 aiv="cls: aiv-slide-down; repeat; delay: 500;">Slide - Delayed</h2>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-slide-left; children: .card; delay: 200; delay_all: 500; repeat;&quot;</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;cards&quot;</span><span style="color: #f92672">&gt;</span>
+	<span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;card&quot;</span><span style="color: #f92672">&gt;</span>
+		<span style="color: #f92672">&lt;h3&gt;</span>Title<span style="color: #f92672">&lt;/h3&gt;</span>
+		<span style="color: #f92672">&lt;p&gt;</span>Phasellus facilisis pretium est sit amet ultrices.<span style="color: #f92672">&lt;/p&gt;</span>
+	<span style="color: #f92672">&lt;/div&gt;</span>
+	...
+<span style="color: #f92672">&lt;/div&gt;</span>
+</pre></div>
 				<div aiv="cls: aiv-slide-left; children: .card; delay: 200; delay_all: 500; repeat;" class="cards">
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 					<div class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
-					</div>
-					<div class="card">
-						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 				</div>
-
+			</section>
+			<section class="page">
 				<h2 aiv="cls: aiv-slide-right; repeat;">Scale up - Scale down with delay</h2>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;cards&quot;</span><span style="color: #f92672">&gt;</span>
+	<span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-scale-up; repeat;&quot;</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;card&quot;</span><span style="color: #f92672">&gt;</span>
+		<span style="color: #f92672">&lt;h3&gt;</span>Title<span style="color: #f92672">&lt;/h3&gt;</span>
+		<span style="color: #f92672">&lt;p&gt;</span>Phasellus facilisis pretium est sit amet ultrices.<span style="color: #f92672">&lt;/p&gt;</span>
+	<span style="color: #f92672">&lt;/div&gt;</span>
+	<span style="color: #f92672">&lt;div</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-scale-down; repeat; delay: 1000;&quot;</span> <span style="color: #a6e22e">class=</span><span style="color: #e6db74">&quot;card&quot;</span><span style="color: #f92672">&gt;</span>
+		<span style="color: #f92672">&lt;h3&gt;</span>Title<span style="color: #f92672">&lt;/h3&gt;</span>
+		<span style="color: #f92672">&lt;p&gt;</span>Phasellus facilisis pretium est sit amet ultrices.<span style="color: #f92672">&lt;/p&gt;</span>
+	<span style="color: #f92672">&lt;/div&gt;</span>
+<span style="color: #f92672">&lt;/div&gt;</span>
+</pre></div>
 				<div class="cards">
 					<div aiv="cls: aiv-scale-up; repeat;" class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 					<div aiv="cls: aiv-scale-down; repeat; delay: 1000;" class="card">
 						<h3>Title</h3>
-						<p>Phasellus facilisis pretium est sit amet ultrices. Etiam aliquet sem ac erat luctus pulvinar. Duis convallis nulla velit, lacinia facilisis turpis tincidunt sed.</p>
+						<p>Phasellus facilisis pretium est sit amet ultrices.</p>
 					</div>
 				</div>
-
+			</section>
+			<section class="page">
 				<h2 aiv="cls: aiv-slide-left; repeat;">Lists</h2>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;ul</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-slide-up; children: li; delay: 300; repeat;&quot;</span><span style="color: #f92672">&gt;</span>
+	<span style="color: #f92672">&lt;li&gt;</span>Maecenas maximus interdum orci, id iaculis nulla molestie non.<span style="color: #f92672">&lt;/li&gt;</span>
+	<span style="color: #f92672">&lt;li&gt;</span>Donec placerat eleifend velit quis vehicula.<span style="color: #f92672">&lt;/li&gt;</span>
+	...
+<span style="color: #f92672">&lt;/ul&gt;</span>
+</pre></div>
 				<ul aiv="cls: aiv-slide-up; children: li; delay: 300; repeat;">
 					<li>Maecenas maximus interdum orci, id iaculis nulla molestie non.</li>
 					<li>Donec placerat eleifend velit quis vehicula.</li>
 					<li>orem ipsum dolor sit amet, consectetur adipiscing elit.</li>
 					<li>Nulla et eros orci.</li>
 				</ul>
-
-				<h3 class="js-api-example">JS API Example</h3>
-
 			</section>
+			<section class="page">
+				<h2 aiv="cls: aiv-fade; repeat;">Tweaking when in view</h2>
+				<p>The in_view property contains numbers correlating to the positions in view to show the element as visible. For example -0.1,1.1 would show the element 10% before and after the element would usually be visible. 0.1,0.9 would should the element when it is 10% below the top of the screen and 10% above the bottom of the screen.</p>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #f92672">&lt;h3</span> <span style="color: #a6e22e">aiv=</span><span style="color: #e6db74">&quot;cls: aiv-fade; out_cls: aiv-fade-reverse; repeat; in_view: 0.2,0.8;&quot;</span><span style="color: #f92672">&gt;</span>Phasellus facilisis pretium est sit amet ultrices.<span style="color: #f92672">&lt;/h3&gt;</span>
+</pre></div>
+				<h3 aiv="cls: aiv-fade; out_cls: aiv-fade-reverse; repeat; in_view: 0.2,0.8;">Phasellus facilisis pretium est sit amet ultrices.</h3>
+			</section>
+			<section class="page">
+				<h2 aiv="cls: aiv-fade; repeat;">Custom events</h2>
+				<p>You can use the aiv custom events to trigger other effects on view changes</p>
+<div class="code"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">const</span> <span style="color: #a6e22e">el</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">getElementById</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;event_test&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #a6e22e">el</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;aiv/in_view&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){</span>
+	<span style="color: #a6e22e">console</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;in_view&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">});</span>
+<span style="color: #a6e22e">el</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;aiv/out_of_view&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){</span>
+	<span style="color: #a6e22e">console</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;out_of_view&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+				<h3 id="event_test" aiv="cls: aiv-fade; out_cls: aiv-fade-reverse; repeat; in_view: 0.1,0.9;">Phasellus facilisis pretium est sit amet ultrices.</h3>
+			</section>
+			<hr/>
+			<footer>
+				<a href="https://twitter.com/ianhandev">@ianhandev</a> 2019
+				<p>Web developer based in Cheltenham. Working primarily with Javascript, PHP, and WordPress.</p>
+			</footer>
 		</article>
 		<script type="text/javascript" src="../dist/aiv.min.js"></script>
 		<script type="text/javascript">;aiv.init()</script>
 		<script>
-			aiv.add('.js-api-example',{
-				repeat: true,
-				cls: 'aiv-fade'
-			})
 			const el = document.getElementById('event_test');
 			el.addEventListener('aiv/in_view', function(){
 				console.log('in_view')
