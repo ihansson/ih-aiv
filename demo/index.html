@@ -15,7 +15,7 @@
 				<h1>Animate in view - Demo</h1>
 			</header>
 			<section>
-				<h2 aiv="cls: aiv-slide-up; repeat;">Twist</h2>
+				<h2 id="event_test" aiv="cls: aiv-slide-up; repeat;">Twist</h2>
 				<div aiv="cls: aiv-twist; children: .card; delay: 200; repeat;" class="cards">
 					<div class="card">
 						<h3>Title</h3>
@@ -79,12 +79,19 @@
 			</section>
 		</article>
 		<script type="text/javascript" src="../dist/aiv.min.js"></script>
-		<script type="text/javascript">aiv.init()</script>
+		<script type="text/javascript">;aiv.init()</script>
 		<script>
 			aiv.add('.js-api-example',{
 				repeat: true,
 				cls: 'aiv-fade'
 			})
+			const el = document.getElementById('event_test');
+			el.addEventListener('aiv/in_view', function(){
+				console.log('in_view')
+			});
+			el.addEventListener('aiv/out_of_view', function(){
+				console.log('out_of_view')
+			});
 		</script>
 	</body>
 </html>

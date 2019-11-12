@@ -11,8 +11,6 @@ Simply adding the aiv property will trigger the built in `in-view` and `out-of-v
 
 ```
 
-### Extended Examples
-
 You can add custom classes when an element comes in or out of view. Set an offset from which the toggle will happen. Add a delay to when the node is toggled. Or change wheter a toggle is repeated or visible from the start (to not include the out-of-view class).
 
 ```html
@@ -63,6 +61,29 @@ aiv.add('.js-api-example',{
 	repeat: true,
 	delay: 500
 })
+```
+
+### Events
+
+The following events are triggered for nodes in AIV
+
+| Event Name | Action |
+| --- | --- |
+| aiv/load | Node has been loaded into aiv |
+| aiv/before_load | Node is about to be loaded |
+| aiv/remove | Node has been removed from the aiv watch list |
+| aiv/in_view | Node is in view |
+| aiv/out_of_view | Node is out of view |
+| aiv/class_change | Classes are about to be toggled |
+
+```javascript
+const el = document.getElementById('event_test');
+el.addEventListener('aiv/in_view', function(){
+	// in view
+});
+el.addEventListener('aiv/out_of_view', function(){
+	// out of view
+});
 ```
 
 ### AIV Options
@@ -143,8 +164,4 @@ You can also include the `aiv-optional.css` file which includes this helper and 
 
 ### TODO
 
-* Add events
-* Browser testing
-* Performance testing
-* Redo animation library / vendor prefixes
-* Redo demo
+* Add option for child elements to only trigger when in view

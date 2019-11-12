@@ -1,6 +1,16 @@
 let nodes = [],
 	last_call = false,
-	opts = {};
+	opts = {},
+	events = {};
+
+// Custom events
+
+const event_names = ['aiv/load', 'aiv/before_load', 'aiv/remove', 'aiv/in_view', 'aiv/out_of_view', 'aiv/class_change'];
+for(ev in event_names){
+	let event = document.createEvent('Event');
+	event.initEvent(event_names[ev], true, true);
+	events[event_names[ev]] = event;
+}
 
 // Update options
 function configure(_opts){
@@ -19,6 +29,7 @@ function add(selector, options){
 
 // Remove node from list to update
 function remove(node){
+	node.dispatchEvent(events['aiv/remove'])
 	if(node.aiv.timeout) window.clearTimeout(node.aiv.timeout)
 	nodes = nodes.filter(function(_node){ return _node !== node})
 }
@@ -48,6 +59,8 @@ function load(node, options){
 
 	if(node.aiv.children) node.aiv.children = Array.prototype.slice.call(node.querySelectorAll(node.aiv.children));
 
+	node.dispatchEvent(events['aiv/before_load'])
+
 	const to_change = node.aiv.children ? node.aiv.children : [node]
 
 	let in_cls = [node.aiv.cls ? node.aiv.cls : opts.in_cls];
@@ -68,6 +81,8 @@ function load(node, options){
 		if(!node.aiv.start_visible){
 			className(target_node, target_node.aiv.out_cls)
 		}
+
+		target_node.dispatchEvent(events['aiv/load'])
 
 	}
 }
@@ -92,6 +107,7 @@ function toggle(node, visible){
 		// Set classes if in
 		let target_node = to_change[index];
 		if(in_view && target_node.aiv_status !== 'in'){
+			target_node.dispatchEvent(events['aiv/in_view'])
 			target_node.aiv_status = 'in';
 			node.aiv.triggered = true;
 			if(node.aiv.delay){
@@ -104,7 +120,7 @@ function toggle(node, visible){
 		}
 		// Set classes if out
 		if(!in_view && target_node.aiv_status !== 'out'){
-			// Remove node if it should not repeat
+			target_node.dispatchEvent(events['aiv/out_of_view'])
 			if(target_node.aiv.timeout){
 				window.clearTimeout(target_node.aiv.timeout)
 				target_node.aiv.timeout = false
@@ -122,6 +138,7 @@ function toggle(node, visible){
 
 // Changes classes to stored _className
 function className(node, cls){
+	node.dispatchEvent(events['aiv/class_change'])
 	node.className = cls.join(' ');
 }
 
