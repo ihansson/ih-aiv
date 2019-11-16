@@ -1,4 +1,4 @@
-# AIV - Animate In View - [View demo](http://ianhan.com/libraries/ih-aiv/demo)
+# AIV - Animate In View - [View demo](http://ianhan.com/library/aiv)
 
 AIV is a simple library for toggling classes when elements are inview. With support for offseting when the element is in-view, delaying the animation, or triggering classes on child elements in sequence.
 
